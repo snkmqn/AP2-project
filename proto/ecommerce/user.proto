@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "proto/generated/ecommerce/user;userpb";
+
+message RegisterRequest {
+  string username = 1;
+  string email = 2;
+  string password = 3;
+}
+
+message RegisterResponse {
+  string id = 1;
+  string username = 2;
+  string email = 3;
+  string created_at = 4;
+}
+
+message LoginRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message LoginResponse {
+  string token = 1;
+  string username = 2;
+  string email = 3;
+}
+
+message RetrieveProfileRequest {
+  string user_id = 1;
+}
+
+message RetrieveProfileResponse {
+  string username = 1;
+  string email = 2;
+}
+
+service UserService {
+  rpc RegisterUser (RegisterRequest) returns (RegisterResponse);
+  rpc LoginUser (LoginRequest) returns (LoginResponse);
+  rpc RetrieveProfile (RetrieveProfileRequest) returns (RetrieveProfileResponse);
+  rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse);
+}
+
+message DeleteUserRequest {
+  string user_id = 1;
+}
+
+message DeleteUserResponse {
+  string message = 1;
+}
